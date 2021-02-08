@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
-      <head>
-          <title>first practice</title>
-          <link rel="stylesheet" href="styles/style.css">
-          <link rel="stylesheet" href="styles/bootstrap-grid.min.css">
-          <meta charset="utf8">
-      </head>
-        <body>
-
-            <div class="header">
-                <h2>مدیریت محصولات</h2>
-            </div>
+  <head>
+      <title>Js Sample</title>
+      <link rel="stylesheet" href="styles/style.css">
+      <link rel="stylesheet" href="styles/bootstrap-grid.min.css">
+      <meta charset="utf8">
+  </head>
+    <body>
+        <div class="header">
+            <h2>مدیریت محصولات</h2>
+        </div>
+        <div class="container">
             <div class="container">
                 <input type="text" id="search-products" placeholder="جست و جو...">
                 <label>
@@ -19,10 +19,10 @@
                     فقط کالای موجود
                 </label>
                 </br></br>
-                    <select name="" id="sort">
-                        <option value="byEdited">مرتب سازی بر اساس آخرین تغییر</option>
-                        <option value="byCreated">مرتب سازی براساس زمان ایجاد</option>
-                    </select>
+                <select name="" id="sort">
+                    <option value="byEdited">مرتب سازی بر اساس آخرین تغییر</option>
+                    <option value="byCreated">مرتب سازی براساس زمان ایجاد</option>
+                </select>
                 </br></br>
                 <form  id="add-product-form">
                     <input type="text" name="productTitle">
@@ -31,11 +31,8 @@
                 </form>
                 <div id="products"></div>
             </div>
-        </body>
-
-        <!--  <script src="./scripts/jalali-moment.js"></script>-->
+        </div>
+    </body>
 
         <script src='./scripts/web.js'></script>
-
-
 </html>

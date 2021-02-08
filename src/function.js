@@ -1,48 +1,66 @@
 
      import {filters} from "./index";
+     import moment from "jalali-moment";
 
-     let getSaveProducts = function() {
-
+     let getSaveProducts = () => {
             const productsJSON = localStorage.getItem('products')
-                if( productsJSON  !== null){
-                    return  JSON.parse(productsJSON);
-                }else{
-                    return [];
-                }
+            return productsJSON  !== null ?  JSON.parse(productsJSON) : [] ;
     }
+
      export var  products = getSaveProducts();
 
      export function changeProducts (newproduct){
         products = newproduct
     }
 
-     export const saveProducts = function (products) {
+     export const saveProducts = (products) => {
         localStorage.setItem('products' , JSON.stringify(products))
     }
 
-     export const removeProducts = function(id){
-        const productIndex = products.findIndex(function(item){
-            return item.id === id
-        })
-        if(productIndex > -1){
-            products.splice(productIndex,1)
-        }
+     export const removeProducts = (id) =>{
+        const productIndex = products.findIndex(item => item.id === id)
+        return productIndex > -1 ? products.splice(productIndex,1) : '' ;
     }
 
      export const toggleProduct = function(id){
-        const product = products.find(function(item){
-            return item.id === id
-        })
-        if(product != undefined){
-            product.exists  = !product.exists
-        }
+        const product = products.find(item => item.id === id)
+        product != undefined ? product.exists  = !product.exists : '';
      }
 
-     export const renderProducts = function(products , filters){
-            let filterProducts = products.filter(function(item){
+      const sortProduct = function(products , sortBy){
+         if(sortBy === 'byEdited'){
+              return products.sort(( a , b)=>{
+                    if(a.updated > b.updated){
+                        return -1;
+                    }else if( a.updated < a.updated){
+                        return 1;
+                   }else{
+                        return  0;
+                    }
+              })
+         }else if( sortBy === 'byCreated') {
+              return products.sort((a , b) =>{
+                  if(a.created > b.created){
+                      return -1
+                  }else if( a.created < b.created){
+                      return 1;
+                  }else{
+                      return 0;
+                  }
+              })
+
+         }else{
+             return  products ;
+         }
+     }
+
+     export const renderProducts = (products , filters) =>{
+
+            sortProduct(products , filters.sortBy);
+            let filterProducts = products.filter((item) => {
                  return  item.title.includes(filters.searchItem);
             });
-            filterProducts = filterProducts.filter(function(item){
+            filterProducts = filterProducts.filter((item)=>{
                 if(filters.availableProducts){
                     return item.exists
                 }else{
@@ -57,7 +75,7 @@
     }
 
 
-     export const createProductDOM = function(product){
+     export const createProductDOM = (product) =>{
          const productEl = document.createElement('div')
          const checkbox = document.createElement('input')
          const productItem = document.createElement('a')
@@ -76,7 +94,7 @@
          productItem.setAttribute('href' , `./edit-product.html#${product.id}`)
          productEl.appendChild(productItem)
 
-         removeButton.textContent = 'Remove'
+         removeButton.textContent = 'حذف'
          productEl.appendChild( removeButton)
          removeButton.addEventListener('click',function(){
              removeProducts(product.id)
@@ -85,6 +103,11 @@
          })
 
          return productEl
+    }
+
+
+     export const lastEditMessage = (timestamp) =>{
+         return `last Edit : ${ moment(timestamp).locale('fa').fromNow()}`
     }
 
 
