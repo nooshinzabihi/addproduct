@@ -3,8 +3,13 @@
      import moment from "jalali-moment";
 
      let getSaveProducts = () => {
-            const productsJSON = localStorage.getItem('products')
-            return productsJSON  !== null ?  JSON.parse(productsJSON) : [] ;
+             const productsJSON = localStorage.getItem('products')
+             try{
+                 return productsJSON  !== null ?  JSON.parse(productsJSON) : [] ;
+             }catch(e){
+                 return [];
+             }
+
     }
 
      export var  products = getSaveProducts();
@@ -20,7 +25,7 @@
      export const removeProducts = (id) =>{
         const productIndex = products.findIndex(item => item.id === id)
         return productIndex > -1 ? products.splice(productIndex,1) : '' ;
-    }
+     }
 
      export const toggleProduct = function(id){
         const product = products.find(item => item.id === id)
@@ -108,7 +113,7 @@
 
      export const lastEditMessage = (timestamp) =>{
          return `last Edit : ${ moment(timestamp).locale('fa').fromNow()}`
-    }
+     }
 
 
 
