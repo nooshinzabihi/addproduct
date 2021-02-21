@@ -72,7 +72,7 @@
                     return  true ;
                 }
             });
-            let productCont= document.querySelector('#products')
+            let productCont= document.querySelector('#products');
             if(productCont){ document.querySelector('#products').innerHTML=''}
             filterProducts.forEach(function(item){
                 if(productCont){ document.querySelector('#products').appendChild(createProductDOM(item))}
@@ -81,33 +81,38 @@
 
 
      export const createProductDOM = (product) =>{
-         const productEl = document.createElement('div')
-         const checkbox = document.createElement('input')
-         const productItem = document.createElement('a')
-         const removeButton = document.createElement('button')
+         const productEl = document.createElement('div');
+         const checkbox = document.createElement('input');
+         const productItem = document.createElement('a');
+         const removeButton = document.createElement('button');
+         const productPrice = document.createElement('p');
 
          checkbox.setAttribute('type' , 'checkbox')
          checkbox.checked = !products.exists
          productEl.appendChild(checkbox)
          checkbox.addEventListener('change'  , function(){
                toggleProduct(product.id);
-               saveProducts(product)
-               renderProducts(products , filters)
+               saveProducts(product);
+               renderProducts(products , filters);
          })
 
-         productItem.textContent = product.title
-         productItem.setAttribute('href' , `./edit-product.html#${product.id}`)
-         productEl.appendChild(productItem)
+         productItem.textContent = product.title;
+         productItem.setAttribute('href' , `./edit-product.html#${product.id}`);
+         productEl.appendChild(productItem);
+         productEl.setAttribute('class', 'product-row')
 
-         removeButton.textContent = 'حذف'
-         productEl.appendChild( removeButton)
+         productPrice.textContent= `${product.price} تومان`;
+         productEl.appendChild(productPrice);
+
+         removeButton.textContent = 'حذف';
+         productEl.appendChild( removeButton);
          removeButton.addEventListener('click',function(){
-             removeProducts(product.id)
-             saveProducts(products)
-             renderProducts(products , filters)
+             removeProducts(product.id);
+             saveProducts(products);
+             renderProducts(products , filters);
          })
 
-         return productEl
+         return productEl;
     }
 
 

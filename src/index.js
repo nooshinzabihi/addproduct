@@ -35,7 +35,8 @@
             });
              func.saveProducts(products);
              func.renderProducts( products , filters );
-             e.target.elements.productTitle.value =''
+             e.target.elements.productTitle.value ='';
+             e.target.elements.productPrice.value ='';
     });
 
 
