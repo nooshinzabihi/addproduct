@@ -5,7 +5,6 @@
 
 body {
     margin: 0 auto;
-    overflow: hidden;
     font-family: 'Vazir-FD';
     direction: rtl;
     background: #FAFAFA;
@@ -79,6 +78,9 @@ body {
     min-width: 0;
     background-color: #fff;
     background-clip: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #add-product-form button {

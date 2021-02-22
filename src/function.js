@@ -87,6 +87,7 @@
          const removeButton = document.createElement('button');
          const productPrice = document.createElement('p');
 
+
          checkbox.setAttribute('type' , 'checkbox')
          checkbox.checked = !products.exists
          productEl.appendChild(checkbox)
@@ -101,7 +102,7 @@
          productEl.appendChild(productItem);
          productEl.setAttribute('class', 'product-row')
 
-         productPrice.textContent= `${product.price} تومان`;
+         productPrice.textContent= `${product.price}   تومان `;
          productEl.appendChild(productPrice);
 
          removeButton.textContent = 'حذف';
